@@ -1,0 +1,398 @@
+{
+  "name": "Responses automations",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "documentId": {
+          "__rl": true,
+          "value": GOOGLE_SHEETS_ID_EXAMPLE,
+          "mode": "list",
+          "cachedResultName": Lead Capture Examples,
+          "cachedResultUrl": "GOOGLE_SHEETS_ID_EXAMPLE"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 568936106,
+          "mode": "list",
+          "cachedResultName": "Responses automations",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/EXAMPLE"
+        },
+        "event": "rowAdded",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTrigger",
+      "typeVersion": 1,
+      "position": [
+        -80,
+        -16
+      ],
+      "id": "b69a5c48-d660-4381-98f2-db25a484b35c",
+      "name": "Google Sheets Trigger",
+      "credentials": {
+        "googleSheetsTriggerOAuth2Api": {
+          "id": "543SDFmLqY3KjMbT",
+          "name": "Google Sheets Trigger account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "8a30fb5e-b8d2-4984-809f-73a8e95bff4c",
+              "leftValue": "={{ $json['Você já é cliente da Example Automation Company?'] }}",
+              "rightValue": "=",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            },
+            {
+              "id": "3afb4671-c51b-4ec8-8e78-80f07fa05ba7",
+              "leftValue": "={{ $json['Você já é cliente da Example Automation Company?'] }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEquals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        208,
+        0
+      ],
+      "id": "e386715a-85f9-4a26-97f6-9db54317a462",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Google Sheets Trigger').item.json['Qual seu objetivo com os nossos serviços de automações por meio do N8N?'] }}{{ $('Google Sheets Trigger').item.json['Se você é ou já foi um cliente nosso, fale conosco como foi sua experiência com nossos serviços.'] }}",
+        "options": {
+          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes já existentes com uma proposta comercial bem atrativa onde fica bom para todo mundo, e escrever uma resposta com uma proposta comercial e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nplanos: Plano Starter, Plano Pro e Plano Enterprise.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Example Automation Company, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        480,
+        -112
+      ],
+      "id": "9d05aabb-b838-4041-b86e-31a7493dc726",
+      "name": "AI Agent",
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json['Endereço de e-mail'] }}",
+        "subject": "={{ $('Google Sheets Trigger').item.json['Endereço de e-mail'] }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        -192
+      ],
+      "id": "63167161-a131-4c81-9650-c3f2dd755fac",
+      "name": "Send a message",
+      "webhookId": "7ef2c512-490f-429c-84a3-a59e270e44aa",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "LrVRmcOZzIegYkwK",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Google Sheets Trigger').item.json['Endereço de e-mail'] }}",
+        "subject": "={{ $('Google Sheets Trigger').item.json['Endereço de e-mail'] }}",
+        "message": "={{ $json.output }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        896,
+        96
+      ],
+      "id": "b350e11b-f7ec-4771-a666-e9fa475b2c8a",
+      "name": "Send a message1",
+      "webhookId": "5ea1aff7-b515-4856-8bfe-2b5bd1b29018",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "LrVRmcOZzIegYkwK",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "Condicional entre novos clientes e clientes já existentes",
+        "height": 240,
+        "color": 6
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        144,
+        -96
+      ],
+      "id": "024c7c37-2134-4322-8bb9-52daf3968a59",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "Respostas do formulário",
+        "height": 208,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -144,
+        -64
+      ],
+      "id": "938d1717-5bf0-495c-a725-463115ca6db9",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "Proposta comercial",
+        "height": 224,
+        "width": 224,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        832,
+        -240
+      ],
+      "id": "0be16589-63f6-46e3-9523-9e7f82d98bb1",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "Bem vindo aos serviços",
+        "height": 224,
+        "width": 224,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        832,
+        32
+      ],
+      "id": "aa27ab1e-0829-4b96-802c-f36fd5c52539",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "Clientes já existentes\n",
+        "height": 176,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        -160
+      ],
+      "id": "e588859b-9925-43be-975b-43f1833280c1",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        464,
+        -288
+      ],
+      "id": "cbe048d0-b46f-4fe6-96ee-a728b11625c1",
+      "name": "Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EvObwlxmpnCHjQlC",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1.1,
+      "position": [
+        640,
+        -288
+      ],
+      "id": "d85b422f-97e1-4e25-b9f3-287226a5c118",
+      "name": "Google Gemini2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "EvObwlxmpnCHjQlC",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Google Sheets Trigger').item.json['Qual seu objetivo com os nossos serviços de automações por meio do N8N?'] }}{{ $('Google Sheets Trigger').item.json['Se você é ou já foi um cliente nosso, fale conosco como foi sua experiência com nossos serviços.'] }}",
+        "options": {
+          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes em potencial que não trabalham com agente ainda, onde vai recebe-los com uma mensagem de bem vindo e explicar o que nossa empresa pode fazer por eles, e escrever uma resposta com uma proposta comercial de leve por ultimo assim só pra ele entender como funciona os planos e descontos e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nplanos: Plano Starter, Plano Pro e Plano Enterprise.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Lucas Company Solutions, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        480,
+        96
+      ],
+      "id": "c277b3a2-2c68-41c5-ac32-3060884d3ac5",
+      "name": "AI Agent2"
+    },
+    {
+      "parameters": {
+        "content": "Clientes novos\n",
+        "height": 176,
+        "width": 288
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        448,
+        48
+      ],
+      "id": "c1219a79-39b4-4f04-a8b9-426c35381cc4",
+      "name": "Sticky Note5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Sheets Trigger": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "AI Agent2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "Google Gemini": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent2": {
+      "main": [
+        [
+          {
+            "node": "Send a message1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "b70d7a6e-1867-4ef4-a831-84d2f62ad1b0",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "e9df210eacb48028cc6036a96d057e45205fe1d3831d7433d8175e2a47ae649e"
+  },
+  "nodeGroups": [],
+  "id": "31cN0gn8dFg0zJmS",
+  "tags": []
+}
