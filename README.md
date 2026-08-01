@@ -6,6 +6,12 @@ Uma automação desenvolvida utilizando **n8n**, **Google Forms**, **Google Shee
 
 ---
 
+**Aqui está o vídeo dos processos em pleno funcionamento:**
+
+https://github.com/user-attachments/assets/dac28941-ab32-402c-9975-af0c07f6cbc6
+
+---
+
 # 📌 O Problema
 
 Empresas recebem diversas respostas de formulários diariamente e, muitas vezes, precisam analisar manualmente cada cliente para decidir qual abordagem utilizar.
