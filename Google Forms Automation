@@ -1,5 +1,5 @@
 {
-  "name": "Responses automations",
+  "name": "Automação de Formulários",
   "nodes": [
     {
       "parameters": {
@@ -12,17 +12,17 @@
         },
         "documentId": {
           "__rl": true,
-          "value": GOOGLE_SHEETS_ID_EXAMPLE,
+          "value": "15CuocOezYLKT-mJWefZ08PUEdJUIME-Jqs876HJggI0",
           "mode": "list",
-          "cachedResultName": Lead Capture Examples,
-          "cachedResultUrl": "GOOGLE_SHEETS_ID_EXAMPLE"
+          "cachedResultName": "Teste de Automação pelo N8N de Formulários (respostas)",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15CuocOezYLKT-mJWefZ08PUEdJUIME-Jqs876HJggI0/edit?usp=drivesdk"
         },
         "sheetName": {
           "__rl": true,
           "value": 568936106,
           "mode": "list",
-          "cachedResultName": "Responses automations",
-          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/EXAMPLE"
+          "cachedResultName": "Respostas ao formulário 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/15CuocOezYLKT-mJWefZ08PUEdJUIME-Jqs876HJggI0/edit#gid=568936106"
         },
         "event": "rowAdded",
         "options": {}
@@ -54,24 +54,15 @@
           "conditions": [
             {
               "id": "8a30fb5e-b8d2-4984-809f-73a8e95bff4c",
-              "leftValue": "={{ $json['Você já é cliente da Example Automation Company?'] }}",
+              "leftValue": "={{ $json['Você já é cliente da Lucas Company Solutions?'] }}",
               "rightValue": "=",
               "operator": {
                 "type": "string",
                 "operation": "equals"
               }
-            },
-            {
-              "id": "3afb4671-c51b-4ec8-8e78-80f07fa05ba7",
-              "leftValue": "={{ $json['Você já é cliente da Example Automation Company?'] }}",
-              "rightValue": "",
-              "operator": {
-                "type": "string",
-                "operation": "notEquals"
-              }
             }
           ],
-          "combinator": "and"
+          "combinator": "or"
         },
         "options": {}
       },
@@ -89,7 +80,7 @@
         "promptType": "define",
         "text": "={{ $('Google Sheets Trigger').item.json['Qual seu objetivo com os nossos serviços de automações por meio do N8N?'] }}{{ $('Google Sheets Trigger').item.json['Se você é ou já foi um cliente nosso, fale conosco como foi sua experiência com nossos serviços.'] }}",
         "options": {
-          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes já existentes com uma proposta comercial bem atrativa onde fica bom para todo mundo, e escrever uma resposta com uma proposta comercial e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nplanos: Plano Starter, Plano Pro e Plano Enterprise.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Example Automation Company, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
+          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes já existentes com uma proposta comercial bem atrativa onde fica bom para todo mundo, e escrever uma resposta com uma proposta comercial e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nPreços: R$ 499 por mês o plano básico, R$ 1.499 por mês o plano Médio e R$ 1.997 por mês o plano avançado.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Lucas Company Solutions, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -273,7 +264,7 @@
         "promptType": "define",
         "text": "={{ $('Google Sheets Trigger').item.json['Qual seu objetivo com os nossos serviços de automações por meio do N8N?'] }}{{ $('Google Sheets Trigger').item.json['Se você é ou já foi um cliente nosso, fale conosco como foi sua experiência com nossos serviços.'] }}",
         "options": {
-          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes em potencial que não trabalham com agente ainda, onde vai recebe-los com uma mensagem de bem vindo e explicar o que nossa empresa pode fazer por eles, e escrever uma resposta com uma proposta comercial de leve por ultimo assim só pra ele entender como funciona os planos e descontos e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nplanos: Plano Starter, Plano Pro e Plano Enterprise.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Lucas Company Solutions, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
+          "systemMessage": "Você é um analisador de respostas de formulários Expert onde responderá clientes em potencial que não trabalham com agente ainda, onde vai recebe-los com uma mensagem de bem vindo e explicar o que nossa empresa pode fazer por eles, e escrever uma resposta com uma proposta comercial de leve por ultimo assim só pra ele entender como funciona os planos e descontos e uma analise do que ele respondeu de como avaliação dos nossos serviços fazendo um agradecimento se positivo e se negativo pedir desculpas e nos contar como podemos melhorar.\n\nPreços: R$ 499 por mês o plano básico, R$ 1.499 por mês o plano Médio e R$ 1.997 por mês o plano avançado.\n\nse recomendar uma empresa amiga tem 15% de desconto.\n\nDescrição da nossa empresa: Somos á Lucas Company Solutions, onde prestamos serviços com automações de IA com N8N para diversas empresas. fazemos de tudo para as empresas aumentarem seu faturamento e diminuir a sobrecarga de processos manuais. \n\nTratar de forma amigável e próxima de empresa profissional para a outra.\n\nAlém disso, sempre responda formatando o texto em HTML válido, usando:\n- <br> para quebras de linha\n- <b> para negrito\n- <ul><li>...</li></ul> para listas\ne quaisquer outras formatações necessárias"
         }
       },
       "type": "@n8n/n8n-nodes-langchain.agent",
@@ -385,9 +376,10 @@
   "active": true,
   "settings": {
     "executionOrder": "v1",
-    "binaryMode": "separate"
+    "binaryMode": "separate",
+    "availableInMCP": false
   },
-  "versionId": "b70d7a6e-1867-4ef4-a831-84d2f62ad1b0",
+  "versionId": "ca090f35-6dd1-4021-aa75-88479e96ec15",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "e9df210eacb48028cc6036a96d057e45205fe1d3831d7433d8175e2a47ae649e"
